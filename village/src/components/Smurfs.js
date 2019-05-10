@@ -7,6 +7,7 @@ class Smurfs extends Component {
     return (
       <div className="Smurfs">
         <h1>Smurf Village</h1>
+        <h2>"Smurf's aren't blue they're green adjust your TV"</h2>
         <ul>
           {this.props.smurfs.map(smurf => {
             return (
@@ -26,7 +27,7 @@ class Smurfs extends Component {
 }
 
 Smurf.defaultProps = {
- smurfs: [],
+smurfs: []
 };
 
 export default Smurfs;

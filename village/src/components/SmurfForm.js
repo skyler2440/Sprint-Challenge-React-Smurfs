@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 class SmurfForm extends Component {
   constructor(props) {
@@ -10,10 +11,18 @@ class SmurfForm extends Component {
     };
   }
 
-  addSmurf = event => {
-    event.preventDefault();
-    // add code to create the smurf using the api
-
+  addSmurf = e => {
+    e.preventDefault();
+    axios
+      .post('http://localhost:3333/smurfs', this.state)
+      .then(res => {
+        console.log(res.data);
+        this.props.sLUpdate(res.data);
+      })
+      .catch(err => {
+        console.log("error", err)
+      });
+    
     this.setState({
       name: '',
       age: '',
@@ -31,19 +40,19 @@ class SmurfForm extends Component {
         <form onSubmit={this.addSmurf}>
           <input
             onChange={this.handleInputChange}
-            placeholder="name"
+            placeholder="Name"
             value={this.state.name}
             name="name"
           />
           <input
             onChange={this.handleInputChange}
-            placeholder="age"
+            placeholder="Age"
             value={this.state.age}
             name="age"
           />
           <input
             onChange={this.handleInputChange}
-            placeholder="height"
+            placeholder="Height in CM (Just put the number 5 not 5cm)"
             value={this.state.height}
             name="height"
           />
